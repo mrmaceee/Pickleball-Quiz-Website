@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Conditional Logic Paddle Quiz</title>
+	<link rel="stylesheet" href="paddlestyle.css">
+	
+</head>
+	<nav class="navbar">
+		<div class="logo-container">
+			<img src="x40.png" alt="logo" class="logo">
+			<a href="https://www.pickleballquiz.com" class="logo-text">pickleballquiz.com</a>
+		</div>
+		<ul class="nav-links">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="paddlequiz10.html">Paddle Quiz</a></li>
+			<li><a href="court-shoe-quiz.html">Shoe Quiz</a></li>
+		</ul>
+    </nav>	
+<body>
+  <div class="container">
+    <h1>Conditional Logic Paddle Quiz</h1>
+	
+	<div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <form id="quiz-form">
+		<!-- Questions -->
+		<div id="question1">
+			<label for="budget"><h4><p>What is your budget?</p></h4></label>
+			<h4><label><input type="radio" name="budget" value="under_100"> Under $100</label></h4><br>
+			<h4><label><input type="radio" name="budget" value="100_150"> $100-$150</label></h4><br>
+			<h4><label><input type="radio" name="budget" value="over_150"> Over $150</label></h4><br>
+			<button type="button" onclick="displayQuestion(2)">Next</button>
+		</div>
+
+
+		<div id="question2" style="display:none;">
+			<h4><label for="skill"><h4><p>What is your skill level?</p></h4></label>
+			<h4><label><input type="radio" name="skill" value="beginner">Beginner</label></h4><br>
+			<h4><label><input type="radio" name="skill" value="intermediate">Intermediate</label></h4><br>
+			<h4><label><input type="radio" name="skill" value="advanced">Advanced</label></h4><br>
+			<button type="button" onclick="displayQuestion(3)">Next</button>
+		</div>
+
+		<div id="question3" style="display:none;">
+			<h4><label for="style"><h4><p>What is your primary playing style?</p></h4></label>
+			<h4><label><input type="radio" name="style" value="power">Power</label></h4><br>
+			<h4><label><input type="radio" name="style" value="control">Control</label></h4><br>
+			<h4><label><input type="radio" name="style" value="balanced">Balanced</label></h4><br>
+			<button type="button" onclick="displayQuestion(4)">Next</button>
+		</div>
+		
+		<div id="question4" style="display:none;">
+			<h4><label for="weight"><h4><p>What is your preferred weight?</p></h4></label>
+			<h4><label><input type="radio" name="weight" value="light">Light  (7 – 7.6 oz)</label></h4><br>
+			<h4><label><input type="radio" name="weight" value="medium">Mid  (7.6 – 8.2 oz)</label></h4><br>
+			<h4><label><input type="radio" name="weight" value="heavy">Heavy  (above 8.2 oz)</label></h4><br>
+			<button type="button" onclick="displayQuestion(5)">Next</button>
+		</div>
+
+		<div id="question5" style="display:none;">
+			<h4><label for="grip-size"><h4><p>What is your preferred grip size?</p></h4></label>
+			<h4><label><input type="radio" name="grip-size" value="small">Small</label></h4><br>
+			<h4><label><input type="radio" name="grip-size" value="medium">Medium</label></h4><br>
+			<h4><label><input type="radio" name="grip-size" value="large">Large</label></h4><br>
+			<button type="button" onclick="calculateResult()">Submit</button>
+		</div>
+    </form>
+
+    <p id="result" style="display:none;">Your ideal paddle is: <span id="result-text"></span></p>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+		// Add a function to update the progress bar
+		function updateProgressBar(percentage) {
+			const progressBar = document.getElementById("progress-bar");
+			progressBar.style.width = percentage + "%";
+		}
+
+
+		function displayQuestion(questionNumber) {
+		  // hide current question
+		  document.getElementById("question" + (questionNumber - 1)).style.display = "none";
+		  // show next question
+		  document.getElementById("question" + questionNumber).style.display = "block";
+
+		  // Update progress bar
+		  updateProgressBar((questionNumber - 1) * 25);
+}
+
+		function calculateResult() {
+			const budget = document.querySelector('input[name="budget"]:checked').value;
+			const skill = document.querySelector('input[name="skill"]:checked').value;
+			const style = document.querySelector('input[name="style"]:checked').value;
+			const weight = document.querySelector('input[name="weight"]:checked').value;
+			const gripSize = document.querySelector('input[name="grip-size"]:checked').value;
+
+
+			// List of 243 possible outcomes
+			const results = [
+				["under_100", "beginner", "power", "light", "small"],
+				["under_100", "beginner", "power", "light", "medium",],
+				["under_100", "beginner", "power", "light", "large"],
+				["under_100", "beginner", "power", "medium", "small"],
+				["under_100", "beginner", "power", "medium", "medium"],
+				["under_100", "beginner", "power", "medium", "large"],
+				["under_100", "beginner", "power", "heavy", "small"],
+				["under_100", "beginner", "power", "heavy", "medium"],
+				["under_100", "beginner", "power", "heavy", "large"],
+				["under_100", "beginner", "control", "light", "small"],
+				["under_100", "beginner", "control", "light", "medium"],
+				["under_100", "beginner", "control", "light", "large"],
+				["under_100", "beginner", "control", "medium", "small"],
+				["under_100", "beginner", "control", "medium", "medium"],
+				["under_100", "beginner", "control", "medium", "large"],
+				["under_100", "beginner", "control", "heavy", "small"],
+				["under_100", "beginner", "control", "heavy", "medium"],
+				["under_100", "beginner", "control", "heavy", "large"],
+				["under_100", "beginner", "balanced", "light", "small"],
+				["under_100", "beginner", "balanced", "light", "medium"],
+				["under_100", "beginner", "balanced", "light", "large"],
+				["under_100", "beginner", "balanced", "medium", "small"],
+				["under_100", "beginner", "balanced", "medium", "medium"],
+				["under_100", "beginner", "balanced", "medium", "large"],
+				["under_100", "beginner", "balanced", "heavy", "small"],
+				["under_100", "beginner", "balanced", "heavy", "medium"],
+				["under_100", "beginner", "balanced", "heavy", "large"],
+				["under_100", "intermediate", "power", "light", "small"],
+				["under_100", "intermediate", "power", "light", "medium"],
+				["under_100", "intermediate", "power", "light", "large"],
+				["under_100", "intermediate", "power", "medium", "small"],
+				["under_100", "intermediate", "power", "medium", "medium"],
+				["under_100", "intermediate", "power", "medium", "large"],
+				["under_100", "intermediate", "power", "heavy", "small"],
+				["under_100", "intermediate", "power", "heavy", "medium"],
+				["under_100", "intermediate", "power", "heavy", "large"],
+				["under_100", "intermediate", "control", "light", "small"],
+				["under_100", "intermediate", "control", "light", "medium"],
+				["under_100", "intermediate", "control", "light", "large"],
+				["under_100", "intermediate", "control", "medium", "small"],
+				["under_100", "intermediate", "control", "medium", "medium"],
+				["under_100", "intermediate", "control", "medium", "large"],
+				["under_100", "intermediate", "control", "heavy", "small"],
+				["under_100", "intermediate", "control", "heavy", "medium"],
+				["under_100", "intermediate", "control", "heavy", "large"],
+				["under_100", "intermediate", "balanced", "light", "small"],
+				["under_100", "intermediate", "balanced", "light", "medium"],
+				["under_100", "intermediate", "balanced", "light", "large"],
+				["under_100", "intermediate", "balanced", "medium", "small"],
+				["under_100", "intermediate", "balanced", "medium", "medium"],
+				["under_100", "intermediate", "balanced", "medium", "large"],
+				["under_100", "intermediate", "balanced", "heavy", "small"],
+				["under_100", "intermediate", "balanced", "heavy", "medium"],
+				["under_100", "intermediate", "balanced", "heavy", "large"],
+				["under_100", "intermediate", "balanced", "heavy", "large"],
+				["under_100", "advanced", "power", "light", "small"],
+				["under_100", "advanced", "power", "light", "medium"],
+				["under_100", "advanced", "power", "light", "large"],
+				["under_100", "advanced", "power", "medium", "small"],
+				["under_100", "advanced", "power", "medium", "medium"],
+				["under_100", "advanced", "power", "medium", "large"],
+				["under_100", "advanced", "power", "heavy", "small"],
+				["under_100", "advanced", "power", "heavy", "medium"],
+				["under_100", "advanced", "power", "heavy", "large"],
+				["under_100", "advanced", "control", "light", "small"],
+				["under_100", "advanced", "control", "light", "medium"],
+				["under_100", "advanced", "control", "light", "large"],
+				["under_100", "advanced", "control", "medium", "small"],
+				["under_100", "advanced", "control", "medium", "medium"],
+				["under_100", "advanced", "control", "medium", "large"],
+				["under_100", "advanced", "control", "heavy", "small"],
+				["under_100", "advanced", "control", "heavy", "medium"],
+				["under_100", "advanced", "control", "heavy", "large"],
+				["under_100", "advanced", "balanced", "light", "small"],
+				["under_100", "advanced", "balanced", "light", "medium"],
+				["under_100", "advanced", "balanced", "light", "large"],
+				["under_100", "advanced", "balanced", "medium", "small"],
+				["under_100", "advanced", "balanced", "medium", "medium"],
+				["under_100", "advanced", "balanced", "medium", "large"],
+				["under_100", "advanced", "balanced", "heavy", "small"],
+				["under_100", "advanced", "balanced", "heavy", "medium"],
+				["under_100", "advanced", "balanced", "heavy", "large"],
+				["100_150", "beginner", "power", "light", "small"],
+				["100_150", "beginner", "power", "light", "medium"],
+				["100_150", "beginner", "power", "light", "large"],
+				["100_150", "beginner", "power", "medium", "small"],
+				["100_150", "beginner", "power", "medium", "medium"],
+				["100_150", "beginner", "power", "medium", "large"],
+				["100_150", "beginner", "power", "heavy", "small"],
+				["100_150", "beginner", "power", "heavy", "medium"],
+				["100_150", "beginner", "power", "heavy", "large"],
+				["100_150", "beginner", "control", "light", "small"],
+				["100_150", "beginner", "control", "light", "medium"],
+				["100_150", "beginner", "control", "light", "large"],
+				["100_150", "beginner", "control", "medium", "small"],
+				["100_150", "beginner", "control", "medium", "medium"],
+				["100_150", "beginner", "control", "medium", "large"],
+				["100_150", "beginner", "control", "heavy", "small"],
+				["100_150", "beginner", "control", "heavy", "medium"],
+				["100_150", "beginner", "control", "heavy", "large"],
+				["100_150", "beginner", "balanced", "light", "small"],
+				["100_150", "beginner", "balanced", "light", "medium"],
+				["100_150", "beginner", "balanced", "light", "large"],
+				["100_150", "beginner", "balanced", "medium", "small"],
+				["100_150", "beginner", "balanced", "medium", "medium"],
+				["100_150", "beginner", "balanced", "medium", "large"],
+				["100_150", "beginner", "balanced", "heavy", "small"],
+				["100_150", "beginner", "balanced", "heavy", "medium"],
+				["100_150", "beginner", "balanced", "heavy", "large"],
+				["100_150", "intermediate", "power", "light", "small"],
+				["100_150", "intermediate", "power", "light", "medium"],
+				["100_150", "intermediate", "power", "light", "large"],
+				["100_150", "intermediate", "power", "medium", "small"],
+				["100_150", "intermediate", "power", "medium", "medium"],
+				["100_150", "intermediate", "power", "medium", "large"],
+				["100_150", "intermediate", "power", "heavy", "small"],
+				["100_150", "intermediate", "power", "heavy", "medium"],
+				["100_150", "intermediate", "power", "heavy", "large"],
+				["100_150", "intermediate", "control", "light", "small"],
+				["100_150", "intermediate", "control", "light", "medium"],
+				["100_150", "intermediate", "control", "light", "large"],
+				["100_150", "intermediate", "control", "medium", "small"],
+				["100_150", "intermediate", "control", "medium", "medium"],
+				["100_150", "intermediate", "control", "medium", "large"],
+				["100_150", "intermediate", "control", "heavy", "small"],
+				["100_150", "intermediate", "control", "heavy", "medium"],
+				["100_150", "intermediate", "control", "heavy", "large"],
+				["100_150", "intermediate", "balanced", "light", "small"],
+				["100_150", "intermediate", "balanced", "light", "medium"],
+				["100_150", "intermediate", "balanced", "light", "large"],
+				["100_150", "intermediate", "balanced", "medium", "small"],
+				["100_150", "intermediate", "balanced", "medium", "medium"],
+				["100_150", "intermediate", "balanced", "medium", "large"],
+				["100_150", "intermediate", "balanced", "heavy", "small"],
+				["100_150", "intermediate", "balanced", "heavy", "medium"],
+				["100_150", "intermediate", "balanced", "heavy", "large"],
+				["100_150", "advanced", "power", "light", "small"],
+				["100_150", "advanced", "power", "light", "medium"],
+				["100_150", "advanced", "power", "light", "large"],
+				["100_150", "advanced", "power", "medium", "small"],
+				["100_150", "advanced", "power", "medium", "medium"],
+				["100_150", "advanced", "power", "medium", "large"],
+				["100_150", "advanced", "power", "heavy", "small"],
+				["100_150", "advanced", "power", "heavy", "medium"],
+				["100_150", "advanced", "power", "heavy", "large"],
+				["100_150", "advanced", "control", "light", "small"],
+				["100_150", "advanced", "control", "light", "medium"],
+				["100_150", "advanced", "control", "light", "large"],
+				["100_150", "advanced", "control", "medium", "small"],
+				["100_150", "advanced", "control", "medium", "medium"],
+				["100_150", "advanced", "control", "medium", "large"],
+				["100_150", "advanced", "control", "heavy", "small"],
+				["100_150", "advanced", "control", "heavy", "medium"],
+				["100_150", "advanced", "control", "heavy", "large"],
+				["100_150", "advanced", "balanced", "light", "small"],
+				["100_150", "advanced", "balanced", "light", "medium"],
+				["100_150", "advanced", "balanced", "light", "large"],
+				["100_150", "advanced", "balanced", "medium", "small"],
+				["100_150", "advanced", "balanced", "medium", "medium"],
+				["100_150", "advanced", "balanced", "medium", "large"],
+				["100_150", "advanced", "balanced", "heavy", "small"],
+				["100_150", "advanced", "balanced", "heavy", "medium"],
+				["100_150", "advanced", "balanced", "heavy", "large"],
+				["over_150", "beginner", "power", "light", "small"],
+				["over_150", "beginner", "power", "light", "medium"],
+				["over_150", "beginner", "power", "light", "large"],
+				["over_150", "beginner", "power", "medium", "small"],
+				["over_150", "beginner", "power", "medium", "medium"],
+				["over_150", "beginner", "power", "medium", "large"],
+				["over_150", "beginner", "power", "heavy", "small"],
+				["over_150", "beginner", "power", "heavy", "medium"],
+				["over_150", "beginner", "power", "heavy", "large"],
+				["over_150", "beginner", "control", "light", "small"],
+				["over_150", "beginner", "control", "light", "medium"],
+				["over_150", "beginner", "control", "light", "large"],
+				["over_150", "beginner", "control", "medium", "small"],
+				["over_150", "beginner", "control", "medium", "medium"],
+				["over_150", "beginner", "control", "medium", "large"],
+				["over_150", "beginner", "control", "heavy", "small"],
+				["over_150", "beginner", "control", "heavy", "medium"],
+				["over_150", "beginner", "control", "heavy", "large"],
+				["over_150", "beginner", "balanced", "light", "small"],
+				["over_150", "beginner", "balanced", "light", "medium"],
+				["over_150", "beginner", "balanced", "light", "large"],
+				["over_150", "beginner", "balanced", "medium", "small"],
+				["over_150", "beginner", "balanced", "medium", "medium"],
+				["over_150", "beginner", "balanced", "medium", "large"],
+				["over_150", "beginner", "balanced", "heavy", "small"],
+				["over_150", "beginner", "balanced", "heavy", "medium"],
+				["over_150", "beginner", "balanced", "heavy", "large"],
+				["over_150", "intermediate", "power", "light", "small"],
+				["over_150", "intermediate", "power", "light", "medium"],
+				["over_150", "intermediate", "power", "light", "large"],
+				["over_150", "intermediate", "power", "medium", "small"],
+				["over_150", "intermediate", "power", "medium", "medium"],
+				["over_150", "intermediate", "power", "medium", "large"],
+				["over_150", "intermediate", "power", "heavy", "small"],
+				["over_150", "intermediate", "power", "heavy", "medium"],
+				["over_150", "intermediate", "power", "heavy", "large"],
+				["over_150", "intermediate", "control", "light", "small"],
+				["over_150", "intermediate", "control", "light", "medium"],
+				["over_150", "intermediate", "control", "light", "large"],
+				["over_150", "intermediate", "control", "medium", "small"],
+				["over_150", "intermediate", "control", "medium", "medium"],
+				["over_150", "intermediate", "control", "medium", "large"],
+				["over_150", "intermediate", "control", "heavy", "small"],
+				["over_150", "intermediate", "control", "heavy", "medium"],
+				["over_150", "intermediate", "control", "heavy", "large"],
+				["over_150", "intermediate", "balanced", "light", "small"],
+				["over_150", "intermediate", "balanced", "light", "medium"],
+				["over_150", "intermediate", "balanced", "light", "large"],
+				["over_150", "intermediate", "balanced", "medium", "small"],
+				["over_150", "intermediate", "balanced", "medium", "medium"],
+				["over_150", "intermediate", "balanced", "medium", "large"],
+				["over_150", "intermediate", "balanced", "heavy", "small"],
+				["over_150", "intermediate", "balanced", "heavy", "medium"],
+				["over_150", "intermediate", "balanced", "heavy", "large"],
+				["over_150", "advanced", "power", "light", "small"],
+				["over_150", "advanced", "power", "light", "medium"],
+				["over_150", "advanced", "power", "light", "large"],
+				["over_150", "advanced", "power", "medium", "small"],
+				["over_150", "advanced", "power", "medium", "medium"],
+				["over_150", "advanced", "power", "medium", "large"],
+				["over_150", "advanced", "power", "heavy", "small"],
+				["over_150", "advanced", "power", "heavy", "medium"],
+				["over_150", "advanced", "power", "heavy", "large"],
+				["over_150", "advanced", "control", "light", "small"],
+				["over_150", "advanced", "control", "light", "medium"],
+				["over_150", "advanced", "control", "light", "large"],
+				["over_150", "advanced", "control", "medium", "small"],
+				["over_150", "advanced", "control", "medium", "medium"],
+				["over_150", "advanced", "control", "medium", "large"],
+				["over_150", "advanced", "control", "heavy", "small"],
+				["over_150", "advanced", "control", "heavy", "medium"],
+				["over_150", "advanced", "control", "heavy", "large"],
+				["over_150", "advanced", "balanced", "light", "small"],
+				["over_150", "advanced", "balanced", "light", "medium"],
+				["over_150", "advanced", "balanced", "light", "large"],
+				["over_150", "advanced", "balanced", "medium", "small"],
+				["over_150", "advanced", "balanced", "medium", "medium"],
+				["over_150", "advanced", "balanced", "medium", "large"],
+				["over_150", "advanced", "balanced", "heavy", "small"],
+				["over_150", "advanced", "balanced", "heavy", "medium"],
+				["over_150", "advanced", "balanced", "heavy", "large"],
+]
+			// Find the first matching result based on the user's answers
+			let resultIndex = -1;
+
+			// loop through the results array to find a match
+			for (let i = 0; i < results.length; i++) {
+				const result = results[i];
+				if (result[0] === budget && result[1] === skill && result[2] === style && result[3] === weight && result[4] === gripSize) {
+					resultIndex = i;
+					break;
+				}
+			}
+
+			// display the result
+			const resultText = document.getElementById("result-text");
+			const resultLink = document.createElement("a");
+			if (resultIndex !== -1) {
+				resultText.textContent = "the " + results[resultIndex][5];
+				resultLink.href = results[resultIndex][5];
+				resultLink.textContent = "View on Amazon";
+			} else {
+				resultText.textContent = "Sorry, we couldn't find a matching paddle for your selection.";
+			}
+			document.getElementById("result").style.display = "block";
+			document.getElementById("result").appendChild(resultLink);
+}
+	</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickleball Paddle Quiz</title>
+    <style>
+        .question {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    <script>
+        const headerContainer = document.getElementById("header-container");
+        fetch("header.html")
+            .then(response => response.text())
+            .then(content => {
+                headerContainer.innerHTML = content;
+            })
+            .catch(error => {
+                console.error("Error loading header:", error);
+            });
+    </script>
+    
+    <div id="quiz">
+        <div class="question active" id="question1">
+            <h2>What is your budget?</h2>
+            <button onclick="nextQuestion(1, 'A')">Under $100</button>
+            <button onclick="nextQuestion(1, 'B')">$100-$150</button>
+            <button onclick="nextQuestion(1, 'C')">Over $150</button>
+        </div>
+        <div class="question" id="question2">
+            <h2>What is your skill level?</h2>
+            <button onclick="nextQuestion(2, 'A')">Beginner</button>
+            <button onclick="nextQuestion(2, 'B')">Intermediate</button>
+            <button onclick="nextQuestion(2, 'C')">Advanced</button>
+        </div>
+        <div class="question" id="question3">
+            <h2>What is your primary playing style?</h2>
+            <button onclick="nextQuestion(3, 'A')">Power</button>
+            <button onclick="nextQuestion(3, 'B')">Control</button>
+            <button onclick="nextQuestion(3, 'C')">Balanced</button>
+        </div>
+        <div class="question" id="question4">
+            <h2>What is your preferred weight?</h2>
+            <button onclick="nextQuestion(4, 'A')">Light</button>
+            <button onclick="nextQuestion(4, 'B')">Midweight</button>
+            <button onclick="nextQuestion(4, 'C')">Heavy</button>
+        </div>
+        <div class="question" id="question5">
+            <h2>What is your preferred grip size?</h2>
+            <button onclick="nextQuestion(5, 'A')">Small</button>
+            <button onclick="nextQuestion(5, 'B')">Medium</button>
+            <button onclick="nextQuestion(5, 'C')">Large</button>
+        </div>
+        <div class="question" id="results">
+            <h2>Your recommended paddle options are:</h2>
+            <div id="result1"></div>
+            <div id="result2"></div>
+            <div id="result3"></div>
+        </div>
+    </div>
+<script>
+    const answers = [];
+    function nextQuestion(questionNumber, answer) {
+        answers[questionNumber - 1] = answer;
+        if (questionNumber === 5) {
+            showResults();
+            return;
+        }
+        const currentQuestion = document.getElementById(`question${questionNumber}`);
+        currentQuestion.classList.remove('active');
+        const next = document.getElementById(`question${questionNumber + 1}`);
+        next.classList.add('active');
+    }
+
+    function showResults() {
+    const answerString = answers.join('');
+    const recommendationPage = `paddle-recommendations/${answerString}.html`;
+    window.location.href = recommendationPage;
+}
+
+</script>
+    
