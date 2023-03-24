@@ -8,7 +8,7 @@ class MyHeader extends HTMLElement {
               <h1>pickleballquiz.com</h1>
             </div>
             <ul>
-              <li><a href="paddlequiz10.html">Paddle Quiz</a></li>
+              <li><a href="paddlequiz11.html">Paddle Quiz</a></li>
               <li><a href="shoe-quiz.html">Shoe Quiz</a></li>
             </ul>
           </nav>
