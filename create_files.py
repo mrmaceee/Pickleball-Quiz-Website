@@ -16,11 +16,11 @@ template = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paddle Recommendations</title>
     <link rel="stylesheet" href="homestyle.css">
+    <script defer src="../header.js"></script>
 </head>
 <body>
-    <div id="header-container"></div>
-    <script src="headerjava.js"></script>
-
+    
+    
     <h1>Your Top 3 Paddle Recommendations</h1>
     <!-- Add your paddle recommendations here -->
 </body>
